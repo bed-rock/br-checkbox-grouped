@@ -1,76 +1,49 @@
 <dom-module id="br-checkbox-grouped">
-  <template>
-    <div class="form_field">
-      <input type="checkbox" id$="{{brId}}" on-click="_validate" required$="{{required}}" checked$="{{checked}}">
-      <label for$="{{brId}}">{{label}}</label>
-      <template is="dom-if" if="{{hasError}}">
-        <p class="form_field--error">{{errorMessage}}</p>
-      </template>
-    </div>
-  </template>
+<template>
+  <div class="form_field">
+    <input type="checkbox" id$="{{brId}}" on-click="_setModel" required$="{{required}}" checked$="{{checked}}">
+    <label for$="{{brId}}">{{label}}</label>    
+  </div>
+</template>
 
-  <script>
-    Polymer({
-      is: 'br-checkbox-grouped',
+<script>
+  Polymer({
+    is: 'br-checkbox-grouped',
 
-      properties: {
-        label: String,
-        brId: String,
-        model: {
-          type: String,
-          reflectToAttribute: true,
-          value: 'false',
-          observer: '_modelChanged'
-        }
-        required: Boolean,
-        errorMessage: String,
-      },
-
-      ready: function () {
-
-        this.hasError = false;
-
-        var formField = this.$$('.form_field');
-        formField.classList.add('checkbox');
-
-        if (this.single === 'true')
-          this._validate();
-      },
-
-      _validateSingle: function () {
-        
-        var formField = this.$$('.form_field');
-
-        if (this.required) {
-          formField.classList.add('is-invalid');
-          this.hasError = true;
-          this.isValidForm = false;
-        }
-        else if (this.hasAttribute('is-invalid')) {
-          formField.classList.remove('is-invalid');
-          this.hasError = false;
-          this.isValidForm = true;
-        }
-
-        this._setModel();
-
-      },
-
-      _setModel: function (event) {
-        this.model = event.target.checked.toString();
-      },
-
-      _modelChanged: function () {
-        if (this.model == 'true') {
-          this.checked = true;
-          this.isValidForm = true;
-        }
-        else {
-          if (this.required)
-            this.isValidForm = false;
-        }
+    properties: {
+      label: String,
+      brId: String,
+      model: {
+        type: String,
+        reflectToAttribute: true,
+        value: 'false',
+        observer: '_modelChanged'
       }
+      required: Boolean
+    },
 
-    });
-  </script>
+    ready: function () {
+      var formField = this.$$('.form_field');
+      formField.classList.add('checkbox');
+    },      
+
+    _setModel: function (event) {
+      this.model = event.target.checked.toString();
+    },
+
+    _modelChanged: function () {
+      if (this.model == 'true') {
+        this.checked = true;
+
+        if (this.required)          
+          this.isValidForm = true;
+      }
+      else {
+        if (this.required)
+          this.isValidForm = false;
+      }
+    }
+
+  });
+</script>
 </dom-module>
