@@ -1,0 +1,25 @@
+{
+  "name": "br-checkbox-grouped",
+  "version": "0.0.1",
+  "homepage": "https://github.com/bed-rock/br-checkbox-grouped",
+  "authors": [
+    "cbfranca <cleidsonbf@gmail.com>"
+  ],
+  "description": "",
+  "main": "br-checkbox-grouped.html",
+  "moduleType": [],
+  "keywords": [
+    "bedrock.checkbox",
+    "bedrock.checkboxgroup",
+    "webcomponent",
+    "polymer"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
